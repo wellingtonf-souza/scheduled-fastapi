@@ -1,37 +1,26 @@
 from abc import ABC, abstractmethod
-from typing import Optional
+from typing import Optional, Type
+from apscheduler.triggers.base import BaseTrigger
 
 class Job(ABC):
     @abstractmethod
     def __init__(
         self, 
-        name: str, 
-        trigger: str, 
-        seconds: Optional[int] = None, 
-        hours: Optional[int] = None, 
+        description: str, 
+        trigger: Type[BaseTrigger],
         misfire_grace_time: Optional[int] = None
     ):
-        self._name = name
+        self._description = description
         self._trigger = trigger
-        self._seconds = seconds
-        self._hours = hours
         self._misfire_grace_time = misfire_grace_time
 
     @property
-    def name(self):
-        return self._name
+    def description(self):
+        return self._description
 
     @property
     def trigger(self):
         return self._trigger
-
-    @property
-    def seconds(self):
-        return self._seconds
-
-    @property
-    def hours(self):
-        return self._hours
 
     @property
     def misfire_grace_time(self):

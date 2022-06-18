@@ -13,7 +13,7 @@ def list_jobs(response: Response):
     for job in scheduler.get_jobs():
         jobs.append({
             "job_id": str(job.id), 
-            "name": str(job.name), 
+            "description": str(job.name), 
             "run_frequency": str(job.trigger), 
             "next_run": str(job.next_run_time)
         })
@@ -30,9 +30,8 @@ def add_jobs():
         model = job()
         scheduler.add_job(
             func = model.action, 
-            name = model.name, 
-            trigger=model.trigger, 
-            seconds=model.seconds, 
+            name = model.description, 
+            trigger=model.trigger,
             misfire_grace_time = model.misfire_grace_time,
             max_instances=1
         )
