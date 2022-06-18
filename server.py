@@ -3,6 +3,7 @@ from src.routes import *
 from src.config import app, scheduler
 from src.logs import logger
 from src.jobs.interface import Job
+from fastapi import Response, status
 
 @app.get("/jobs")
 def list_jobs(response: Response):

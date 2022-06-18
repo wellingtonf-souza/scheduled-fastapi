@@ -3,7 +3,14 @@ from typing import Optional
 
 class Job(ABC):
     @abstractmethod
-    def __init__(self, name: str, trigger: str, seconds: Optional[int] = None, hours: Optional[int] = None, misfire_grace_time: Optional[int] = None):
+    def __init__(
+        self, 
+        name: str, 
+        trigger: str, 
+        seconds: Optional[int] = None, 
+        hours: Optional[int] = None, 
+        misfire_grace_time: Optional[int] = None
+    ):
         self._name = name
         self._trigger = trigger
         self._seconds = seconds
