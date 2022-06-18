@@ -4,6 +4,8 @@ from src.config import app, scheduler
 from src.logs import logger
 from src.jobs.interface import Job
 from fastapi import Response, status
+import warnings
+warnings.filterwarnings("ignore")
 
 @app.get("/jobs")
 def list_jobs(response: Response):

@@ -4,4 +4,4 @@ from apscheduler.executors.pool import ThreadPoolExecutor
 executors = {
     'default': ThreadPoolExecutor(20)
 }
-scheduler = BackgroundScheduler(executors=executors, timezone="america/sao_paulo")
+scheduler = BackgroundScheduler(executors=executors, timezone = "America/Sao_Paulo")
