@@ -1,0 +1,7 @@
+services:
+  scheduled-fastapi:
+    build: .
+    image: scheduled-fastapi
+    container_name: scheduled-fastapi-container
+    ports:
+      - "3000:3000"
