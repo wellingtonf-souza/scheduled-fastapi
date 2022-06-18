@@ -4,6 +4,7 @@ from src.config import app, scheduler
 from src.logs import logger
 from src.jobs.interface import Job
 from fastapi import Response, status
+import json
 import warnings
 warnings.filterwarnings("ignore")
 
@@ -29,19 +30,26 @@ def load_schedule():
 def add_jobs():
     jobs = Job.__subclasses__()
     for job in jobs:
-        model = job()
+        task = job()
         scheduler.add_job(
-            func = model.action, 
-            name = model.description, 
-            trigger=model.trigger,
-            misfire_grace_time = model.misfire_grace_time,
+            func = task.action, 
+            name = task.description, 
+            trigger=task.trigger,
+            misfire_grace_time = task.misfire_grace_time,
             max_instances=1
         )
 
+@app.on_event("startup")
+async def define_status_app():
+    json.dump({"running": True},open("status.json", "w"))
+
 @app.on_event("shutdown")
 async def shutdown_schedule():
-    scheduler.shutdown(wait = False)
-    logger.info("Shutdown schedule")
+    running = json.load(open("status.json","r"))['running']
+    if running:
+        json.dump({"running": False},open("status.json", "w"))
+        scheduler.shutdown(wait = False)
+        logger.info("Shutdown schedule")
 
 if __name__ == '__main__':
     PORT = 3000
