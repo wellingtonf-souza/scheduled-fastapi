@@ -3,7 +3,6 @@ from src.routes import *
 from src.config import app, scheduler
 from src.logs import logger
 from src.jobs.interface import Job
-from fastapi import Response, status
 import json
 import warnings
 warnings.filterwarnings("ignore")
