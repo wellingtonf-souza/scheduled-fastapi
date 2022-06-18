@@ -15,13 +15,14 @@ def add_jobs():
     jobs = Job.__subclasses__()
     for job in jobs:
         task = job()
-        scheduler.add_job(
-            func = task.action, 
-            name = task.description, 
-            trigger=task.trigger,
-            misfire_grace_time = task.misfire_grace_time,
-            max_instances=1
-        )
+        if task.active:
+            scheduler.add_job(
+                func = task.action, 
+                name = task.description, 
+                trigger=task.trigger,
+                misfire_grace_time = task.misfire_grace_time,
+                max_instances=1
+            )
 
 @app.on_event("startup")
 async def define_status_app():

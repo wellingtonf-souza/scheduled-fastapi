@@ -8,10 +8,12 @@ class Job(ABC):
         self, 
         description: str, 
         trigger: Type[BaseTrigger],
+        active: bool = True,
         misfire_grace_time: Optional[int] = None
     ):
         self._description = description
         self._trigger = trigger
+        self._active = active
         self._misfire_grace_time = misfire_grace_time
 
     @property
@@ -25,6 +27,10 @@ class Job(ABC):
     @property
     def misfire_grace_time(self):
         return self._misfire_grace_time
+
+    @property
+    def active(self):
+        return self._active
 
     @abstractmethod
     def action(self):
