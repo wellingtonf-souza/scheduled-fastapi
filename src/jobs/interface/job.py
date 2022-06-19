@@ -3,7 +3,6 @@ from typing import Optional, Type
 from apscheduler.triggers.base import BaseTrigger
 
 class Job(ABC):
-    @abstractmethod
     def __init__(
         self, 
         description: str, 

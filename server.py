@@ -2,7 +2,7 @@ import uvicorn
 from src.routes import *
 from src.config import app, scheduler
 from src.logs import logger
-from src.jobs.interface import Job
+from src.jobs import Job
 import json
 import warnings
 warnings.filterwarnings("ignore")
