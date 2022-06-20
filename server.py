@@ -4,6 +4,7 @@ from src.config import app, scheduler
 from src.logs import logger
 from src.jobs import Job
 import json
+from src.logs import logger
 import warnings
 warnings.filterwarnings("ignore")
 
@@ -16,6 +17,7 @@ def add_jobs():
     for job in jobs:
         task = job()
         if task.active:
+            logger.info(f"adicionando job: {task.description}")
             scheduler.add_job(
                 func = task.action, 
                 name = task.description, 
