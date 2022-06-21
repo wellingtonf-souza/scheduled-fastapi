@@ -4,11 +4,10 @@ from datetime import datetime
 
 class Logger(logging.Logger):
     def __init__(self, level=logging.INFO, filename = 'src/logs/server.log'):
-        self.level = level
-
         logging.getLogger('apscheduler').propagate = False
+        logging.getLogger('uvicorn').propagate = False
         self.logger = logging.getLogger()
-        self.logger.setLevel(self.level)
+        self.logger.setLevel(level)
 
         stream_handler = logging.StreamHandler()
         stream_handler.setFormatter(logging.Formatter('%(asctime)-15s %(levelname)-8s %(message)s'))

@@ -47,7 +47,5 @@ if __name__ == '__main__':
         host='0.0.0.0',
         port=PORT,
         reload=False,
-        debug=False,
-        log_level="info",
-        log_config=uvicorn.config.LOGGING_CONFIG
+        debug=False
     )
